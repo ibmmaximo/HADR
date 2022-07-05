@@ -8,7 +8,7 @@ repo_url: https://github.com/ibmmaximo/backupandrestore
 edit_uri: blob/master/docs/
 
 nav:
-  - 'Home': index.md
+  #- 'Home': index.md
   #- 'Changes': changes.md
   - 'HADR': docs/index.md
   #  - 'OCP': playbooks/ocp.md
