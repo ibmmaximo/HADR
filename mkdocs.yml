@@ -1,6 +1,6 @@
 # mkdocs serve
 
-site_name: MAS Devops Collection
+site_name: High Availability and Disaster Recovery
 site_url: https://ibmmaximo.github.io/backupandrestore
 
 repo_name: GitHub
@@ -10,7 +10,7 @@ edit_uri: blob/master/docs/
 nav:
   #- 'Home': index.md
   #- 'Changes': changes.md
-  - 'High Availabilty and Disaster Recovery Stratgies': index.md
+  - 'High Availabilty and Disaster Recovery Strategies': index.md
   #  - 'OCP': playbooks/ocp.md
   #  - 'Install Core': playbooks/oneclick-core.md
   #  - 'Add IoT': playbooks/oneclick-iot.md
