@@ -1,4 +1,4 @@
-# High Availabilty and Disaster Recovery Stratgies
+# High Availabilty and Disaster Recovery Strategies
 A resilient includes system should be continuous and highly available and have processes and policies that enable recovery from disaster. This article outlines the   options regarding HA/DR for applications deployed on OpenShift.
 
 **High Availability (HA)** means that an application is available regardless of underlying failures. It refers to the system having multiple points of failure by adding redundancy to the system to ensure continuous operations or uptime for an extended period. High Availability ensures your systems, databases, and applications operate when and as needed. An example scenario where high availability comes into play is when a node fails, and Kubernetes reschedules any lost pods to surviving nodes. 
