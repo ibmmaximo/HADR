@@ -69,21 +69,21 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#application-backup-with-oadp-open-api-data-protection">Application Backup with OADP (Open API Data Protection)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ha-practices-for-mas-prerequisites">HA Practices for MAS Prerequisites</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#dr-practices-for-mas-prerequisites">DR Practices for MAS Prerequisites</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mas-core">MAS Core</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mas-sls">MAS SLS</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#manage">Manage</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2-high-availability-disaster-recovery-hadr">DB2 High Availability Disaster Recovery (HADR)</a>
-    </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#application-backup-with-oadp-open-api-data-protection">Application Backup with OADP (Open API Data Protection)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ha-practices-for-mas-prerequisites">HA Practices for MAS Prerequisites</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#dr-practices-for-mas-prerequisites">DR Practices for MAS Prerequisites</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mas-core">MAS Core</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mas-sls">MAS SLS</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#manage">Manage</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#db2-high-availability-disaster-recovery-hadr">DB2 High Availability Disaster Recovery (HADR)</a>
     </li>
     </ul>
                 </li>
@@ -191,13 +191,13 @@ The storage would need to be replicated in line with their Recovery Time Objecti
 <p>In addition to potential points of failure discussed above, ensuring availability of storage is critical for successful high availability of stateful applications.</p>
 <h4 id="storage-availability">Storage availability<a class="headerlink" href="#storage-availability" title="Permanent link"></a></h4>
 <p>The best ways to maintain the availability of storage are to use replicated storage solutions, shared storage that is unaffected by outages, or a database service that is independent of the cluster.</p>
-<h3 id="application-backup-with-oadp-open-api-data-protection">Application Backup with OADP (Open API Data Protection)<a class="headerlink" href="#application-backup-with-oadp-open-api-data-protection" title="Permanent link"></a></h3>
+<h2 id="application-backup-with-oadp-open-api-data-protection">Application Backup with OADP (Open API Data Protection)<a class="headerlink" href="#application-backup-with-oadp-open-api-data-protection" title="Permanent link"></a></h2>
 <p>Application granular and cluster consistent backups using OADP operator and snapshots with CSI interface ensure backup with open standards.</p>
 <p><img alt="Image" src="oadp.png" /></p>
 <p>This open-source operator sets up and installs Velero on the OpenShift platform, allowing users to backup and restore applications. It ensures OCP version independence and works across storage providers (via plug-ins).  It allows you to back up namespace or user labels and persistent volumes using the CSI snapshot interface.  It can backup Persistent Volume data (PV) if the storage provider supports the CSI snapshot interface. </p>
 <p><a href="https://community.ibm.com/community/user/iot/blogs/sarika-budhiraja1/2021/12/31/backup-restore-mas-manage">https://community.ibm.com/community/user/iot/blogs/sarika-budhiraja1/2021/12/31/backup-restore-mas-manage</a></p>
 <p>This blog explains how to install and use the OADP operator to take the application backup. The operator uses the plugin to take the PVs backup for the Manage app attached docs. You need to have storage classes installed to use PVs.  </p>
-<h3 id="ha-practices-for-mas-prerequisites">HA Practices for MAS Prerequisites<a class="headerlink" href="#ha-practices-for-mas-prerequisites" title="Permanent link"></a></h3>
+<h2 id="ha-practices-for-mas-prerequisites">HA Practices for MAS Prerequisites<a class="headerlink" href="#ha-practices-for-mas-prerequisites" title="Permanent link"></a></h2>
 <table>
 <thead>
 <tr>
@@ -234,7 +234,7 @@ The storage would need to be replicated in line with their Recovery Time Objecti
 </tr>
 </tbody>
 </table>
-<h3 id="dr-practices-for-mas-prerequisites">DR Practices for MAS Prerequisites<a class="headerlink" href="#dr-practices-for-mas-prerequisites" title="Permanent link"></a></h3>
+<h2 id="dr-practices-for-mas-prerequisites">DR Practices for MAS Prerequisites<a class="headerlink" href="#dr-practices-for-mas-prerequisites" title="Permanent link"></a></h2>
 <table>
 <thead>
 <tr>
@@ -271,7 +271,7 @@ The storage would need to be replicated in line with their Recovery Time Objecti
 </tr>
 </tbody>
 </table>
-<h3 id="mas-core">MAS Core<a class="headerlink" href="#mas-core" title="Permanent link"></a></h3>
+<h2 id="mas-core">MAS Core<a class="headerlink" href="#mas-core" title="Permanent link"></a></h2>
 <table>
 <thead>
 <tr>
@@ -320,7 +320,7 @@ The storage would need to be replicated in line with their Recovery Time Objecti
 </tr>
 </tbody>
 </table>
-<h3 id="mas-sls">MAS SLS<a class="headerlink" href="#mas-sls" title="Permanent link"></a></h3>
+<h2 id="mas-sls">MAS SLS<a class="headerlink" href="#mas-sls" title="Permanent link"></a></h2>
 <table>
 <thead>
 <tr>
@@ -369,7 +369,7 @@ The storage would need to be replicated in line with their Recovery Time Objecti
 </tr>
 </tbody>
 </table>
-<h3 id="manage">Manage<a class="headerlink" href="#manage" title="Permanent link"></a></h3>
+<h2 id="manage">Manage<a class="headerlink" href="#manage" title="Permanent link"></a></h2>
 <table>
 <thead>
 <tr>
@@ -418,7 +418,7 @@ The storage would need to be replicated in line with their Recovery Time Objecti
 </tr>
 </tbody>
 </table>
-<h3 id="db2-high-availability-disaster-recovery-hadr">DB2 High Availability Disaster Recovery (HADR)<a class="headerlink" href="#db2-high-availability-disaster-recovery-hadr" title="Permanent link"></a></h3>
+<h2 id="db2-high-availability-disaster-recovery-hadr">DB2 High Availability Disaster Recovery (HADR)<a class="headerlink" href="#db2-high-availability-disaster-recovery-hadr" title="Permanent link"></a></h2>
 <p>You can configure Db2® high availability disaster recovery (HADR) in a single Red Hat® OpenShift® project or in different OpenShift projects.
 <a href="https://www.ibm.com/docs/en/cloud-paks/cp-data/4.0?topic=hadr-configuring-starting">https://www.ibm.com/docs/en/cloud-paks/cp-data/4.0?topic=hadr-configuring-starting</a></p>
 <p>If you are installing services that depend on Db2® and you are planning to use IBM® Cloud File Storage on NFS 4 for persistent storage, you must configure ID mapping, which enables no_root_squash. Configuring no_root_squash allows root clients to retain root permissions on the remote NFS share.
@@ -469,5 +469,5 @@ The storage would need to be replicated in line with their Recovery Time Objecti
 
 <!--
 MkDocs version : 1.3.0
-Build Date UTC : 2022-07-06 03:16:30.445290+00:00
+Build Date UTC : 2022-07-06 04:14:22.522586+00:00
 -->
