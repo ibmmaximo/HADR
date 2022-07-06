@@ -1,6 +1,6 @@
 # mkdocs serve
 
-site_name: MAS Devops Collection
+site_name: High Availabilty and Disaster Recovery
 site_url: https://ibmmaximo.github.io/backupandrestore
 
 repo_name: GitHub
