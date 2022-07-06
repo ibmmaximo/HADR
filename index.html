@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" /><link rel="canonical" href="https://ibmmaximo.github.io/backupandrestore/" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>MAS Devops Collection</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+        <link href="extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "HADR";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = "/backupandrestore/";
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/yaml.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> MAS Devops Collection
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href=".">HADR</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#resiliency-solutions-for-different-service-level-objectives">Resiliency Solutions for different Service level objectives</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#scenarios">Scenarios</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#scenario-customer-can-deploy-workloads-in-three-availability-zones">Scenario-Customer can deploy workloads in three availability zones</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#scenario-customer-has-two-data-centers">Scenario-Customer has two data centers</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#activepassive">Active/Passive</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#activepassive-with-backup-cold-dr">Active/Passive with backup (Cold DR)</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#activepassive-with-backup-warm-dr">Active/Passive with backup (Warm DR)</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#activepassive-with-backup-hot-dr">Active/Passive with backup (Hot DR)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#activeactive">Active/Active</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#storage-availability">Storage availability</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#application-backup-with-oadp-open-api-data-protection">Application Backup with OADP (Open API Data Protection)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ha-practices-for-mas-prerequisites">HA Practices for MAS Prerequisites</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dr-practices-for-mas-prerequisites">DR Practices for MAS Prerequisites</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mas-core">MAS Core</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mas-sls">MAS SLS</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#manage">Manage</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#db2-high-availability-disaster-recovery-hadr">DB2 High Availability Disaster Recovery (HADR)</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">MAS Devops Collection</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>HADR</li>
+    <li class="wy-breadcrumbs-aside">
+        <a href="https://github.com/ibmmaximo/backupandrestore/blob/master/docs/index.md"
+          class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="high-availabilty-and-disaster-recovery-stratgies">High Availabilty and Disaster Recovery Stratgies<a class="headerlink" href="#high-availabilty-and-disaster-recovery-stratgies" title="Permanent link"></a></h1>
+<p>A resilient includes system should be continuous and highly available and have processes and policies that enable recovery from disaster. This article outlines the   options regarding HA/DR for applications deployed on OpenShift.</p>
+<p><strong>High Availability (HA)</strong> means that an application is available regardless of underlying failures. It refers to the system having multiple points of failure by adding redundancy to the system to ensure continuous operations or uptime for an extended period. High Availability ensures your systems, databases, and applications operate when and as needed. An example scenario where high availability comes into play is when a node fails, and Kubernetes reschedules any lost pods to surviving nodes. </p>
+<p><strong>Disaster Recovery (DR)</strong> means action needs to be taken to recover applications in the event of a disaster. We need to make sure our systems can survive a disaster, which usually means building a second system in a location removed from the primary so that local events such as weather, earthquakes, or meteors won’t damage both systems.  An example scenario where disaster recovery is needed is when the entire cluster is lost, and the workload must be recovered to a new cluster. The primary goal is to minimize the overall impact of a disaster on business performance. </p>
+<p>By understanding potential points of failure, and risks, you can architect both your applications and your clusters to be as resilient as necessary at each specific level. Depending on the failure type two types of solutions can be used, Backup Solutions and Disaster Recovery Solutions.</p>
+<ul>
+<li>Backup Solutions</li>
+<li>Protection against logical failures </li>
+<li>Restore to the previous point-in-time copy of the data and/or the application state</li>
+<li>Disaster Recovery Solutions</li>
+<li>Protection against physical HW failures and Data Center disasters </li>
+<li>Failover to remote Cold (Standby) or Hot Site</li>
+</ul>
+<p>Recovery Time Objective (RTO) and Recovery Point Objective (RPO) are vital parameters in any disaster recovery or data protection plan. </p>
+<p>Recovery Point Objective (RPO) is a time-based measurement of the maximum amount of data loss that is acceptable to an organization. It is the time between each backup of data. If the last available backup is from 10 hours ago, and the RPO is 12 hours, then it is within the business continuity plan’s RPO parameters. It answers, “Up to what point in time does the business process’s recovery continue acceptably given the volume of data lost during that interval?”</p>
+<p>Recovery Time Objective (RTO) is the duration of time in which a business process must be restored after the disaster to avoid a break in business continuity. It answers, “How much time does it take to recover from business process disruption?”</p>
+<p>The RPO/RTO, along with a business impact analysis, provides the basis for identifying strategies for the business continuity plan. There is always some gap between the actuals and objectives because of various manual and automated steps to bring the business application up. These actuals can only be exposed by disaster and business disruption tests.</p>
+<h2 id="resiliency-solutions-for-different-service-level-objectives">Resiliency Solutions for different Service level objectives<a class="headerlink" href="#resiliency-solutions-for-different-service-level-objectives" title="Permanent link"></a></h2>
+<p>Protection against a wide spectrum of failures is available:
+- Backup Restore: Built on snapshot-based technology. Most customers start with the backup/restore solution. The multiple copies of the backup are kept and can be reverted to the right copy of the backup. This can be used in the following scenarios:
+  - Backup before upgrading to a new version or applying any updates. It can be restored to an earlier point in case something goes wrong.
+  - Cluster goes down (DR). A new cluster can be instantiated and restored (See Active/Passive Scenario section). 
+  - Create a development/QA environment
+- Data centers in different geographical areas. If a site goes down, the requests can be processed by an active cluster on the second site.
+  - No latency dependency
+  - Asynchronous data replication. The replication interval is between 5 – 15 mins.
+  - You can optionally have an external storage RHCS (separate from OCP clusters that run workloads) with an Arbiter node (control plane) in the neutral zone and have synchronous mirroring across Persistent Volumes in both sites (latency &lt; 10ms) for reliability.
+- Data centers in proximity to sites
+  - Latency should be &lt; 10ms
+  - Synchronous replication between sites</p>
+<p><img alt="Image" src="rtorpo.png" /></p>
+<h2 id="scenarios">Scenarios<a class="headerlink" href="#scenarios" title="Permanent link"></a></h2>
+<h3 id="scenario-customer-can-deploy-workloads-in-three-availability-zones">Scenario-Customer can deploy workloads in three availability zones<a class="headerlink" href="#scenario-customer-can-deploy-workloads-in-three-availability-zones" title="Permanent link"></a></h3>
+<p>Deploying an OpenShift cluster across at least three availability zones is a recommended option for a highly available cluster. Control plane nodes are distributed across availability zones. Given that network communication across cloud availability zones has low enough latency to satisfy etcd requirements, the above approach works on most hyperscale cloud providers. However, this tactic will not work across cloud regions, which have much higher latency for region-to-region communication. </p>
+<ul>
+<li>Application deployed on a cluster that is stretched across multiple zones in a region</li>
+<li>ODF (storage layer) provides synchronous consistent copies across all Availability Zones (AZs) ensuring no data loss during zone failure</li>
+<li>ODF has 3 replicas by default and can be stretched across availability zones</li>
+<li>Suitable for public cloud platforms with regions supporting 3 or more AZs</li>
+<li>Can be deployed on-prem when AZs are connected by networks with &lt;10ms latency</li>
+</ul>
+<p><img alt="Image" src="hazones.png" /></p>
+<h3 id="scenario-customer-has-two-data-centers">Scenario-Customer has two data centers<a class="headerlink" href="#scenario-customer-has-two-data-centers" title="Permanent link"></a></h3>
+<p>A stretched cluster between two sites, where one site hosts two control plane nodes and the other hosts the third control plane, does not increase the availability.  When a cluster with two control plane nodes fails, will result in the cluster being unavailable. The potential failure of components between two sites can contribute to the cluster being unavailable. This is a supported configuration but does not increase availability. The better option with two sites is to deploy an OpenShift cluster in each of the two data centers and have a global load balancer in front of them. However, this does require some application awareness and monitoring to ensure that the correct instance is active and that any persistent data used by the application is replicated appropriately.</p>
+<h3 id="activepassive">Active/Passive<a class="headerlink" href="#activepassive" title="Permanent link"></a></h3>
+<p><strong>Active/Passive scenario</strong> where a global load balancer sends all traffic to one location and the app manages replication to the secondary location. The application is deployed on an active cluster.
+The storage would need to be replicated in line with their Recovery Time Objective (RTO) and re-introduced to the destination cluster accordingly. For replicating application data, infrastructure level replication, for example, (a)synchronous storage replication, or application-level replication, for example, DB2 backup and restore can be used. </p>
+<p><img alt="Image" src="activepassive.png" /></p>
+<p>There are three types of DR sites: Cold, Warm, and Hot sites.</p>
+<p><img alt="Image" src="coldwarmhot.png" /></p>
+<h4 id="activepassive-with-backup-cold-dr">Active/Passive with backup (Cold DR)<a class="headerlink" href="#activepassive-with-backup-cold-dr" title="Permanent link"></a></h4>
+<ul>
+<li>Create an OCP cluster in the cold site when a disaster hits.</li>
+<li>Application is backed up periodically. When a disaster hits, the application can be restored to the passive site.</li>
+<li>It requires less infrastructure and is cheap.</li>
+</ul>
+<p><img alt="Image" src="cold.png" /></p>
+<h4 id="activepassive-with-backup-warm-dr">Active/Passive with backup (Warm DR)<a class="headerlink" href="#activepassive-with-backup-warm-dr" title="Permanent link"></a></h4>
+<ul>
+<li>An OCP cluster is running on the passive (standby) site. The application is deployed but potentially scaled down to zero.</li>
+<li>Application is backed up periodically.</li>
+<li>Application can be restored on the passive site periodically or can be restored to the passive/standby site when disaster hits.</li>
+<li>It requires minimum infrastructure for the passive/DR site. More resources can be added to the passive/DR site when disaster hits and the DR site become the primary site.</li>
+</ul>
+<p><img alt="Image" src="warm.png" /></p>
+<h4 id="activepassive-with-backup-hot-dr">Active/Passive with backup (Hot DR)<a class="headerlink" href="#activepassive-with-backup-hot-dr" title="Permanent link"></a></h4>
+<ul>
+<li>An OCP cluster is running on the passive (standby) site. The application is deployed on the DR site.</li>
+<li>Application is backed up periodically.</li>
+<li>Application can be restored on the passive site periodically.</li>
+<li>It requires redundant infrastructure for the passive/DR site.</li>
+</ul>
+<h3 id="activeactive">Active/Active<a class="headerlink" href="#activeactive" title="Permanent link"></a></h3>
+<p><strong>Option 2: Active/Active scenario</strong> where the global load balancer sends traffic to both locations and the app manages cross-replication between them. RTO/RPO = 0. It requires more infrastructure and resources. </p>
+<p><img alt="Image" src="activeactive.png" /></p>
+<p>In addition to potential points of failure discussed above, ensuring availability of storage is critical for successful high availability of stateful applications.</p>
+<h4 id="storage-availability">Storage availability<a class="headerlink" href="#storage-availability" title="Permanent link"></a></h4>
+<p>The best ways to maintain the availability of storage are to use replicated storage solutions, shared storage that is unaffected by outages, or a database service that is independent of the cluster.</p>
+<h3 id="application-backup-with-oadp-open-api-data-protection">Application Backup with OADP (Open API Data Protection)<a class="headerlink" href="#application-backup-with-oadp-open-api-data-protection" title="Permanent link"></a></h3>
+<p>Application granular and cluster consistent backups using OADP operator and snapshots with CSI interface ensure backup with open standards.</p>
+<p><img alt="Image" src="oadp.png" /></p>
+<p>This open-source operator sets up and installs Velero on the OpenShift platform, allowing users to backup and restore applications. It ensures OCP version independence and works across storage providers (via plug-ins).  It allows you to back up namespace or user labels and persistent volumes using the CSI snapshot interface.  It can backup Persistent Volume data (PV) if the storage provider supports the CSI snapshot interface. </p>
+<p><a href="https://community.ibm.com/community/user/iot/blogs/sarika-budhiraja1/2021/12/31/backup-restore-mas-manage">https://community.ibm.com/community/user/iot/blogs/sarika-budhiraja1/2021/12/31/backup-restore-mas-manage</a></p>
+<p>This blog explains how to install and use the OADP operator to take the application backup. The operator uses the plugin to take the PVs backup for the Manage app attached docs. You need to have storage classes installed to use PVs.  </p>
+<h3 id="ha-practices-for-mas-prerequisites">HA Practices for MAS Prerequisites<a class="headerlink" href="#ha-practices-for-mas-prerequisites" title="Permanent link"></a></h3>
+<table>
+<thead>
+<tr>
+<th>Prerequisite</th>
+<th>High Availability</th>
+<th>References</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenShift</td>
+<td>Use Availability Zones <br><br> Label nodes using topology.kubernetes.io/zone</td>
+<td><a href="https://docs.openshift.com/container-platform/4.6/nodes/scheduling/nodes-scheduler-pod-topology-spread-constraints.html">Nodes scheduler pod topology spread constraints</a> <br><br> <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints">Pod topology spread constraints</a> <br><br> <a href="https://kubernetes.io/docs/reference/labels-annotations-taints/#topologykubernetesiozone">Kubernetes topology zone annotations</a></td>
+</tr>
+<tr>
+<td>File System</td>
+<td>ODF (OCS) <br><br> Portworx</td>
+<td><a href="https://cloud.ibm.com/docs/openshift?topic=openshift-ocs-storage-prep">OpenShift Data Foundation</a> <br><br> <a href="https://cloud.ibm.com/docs/openshift?topic=openshift-file_storage">Storing data on IBM Cloud File Storage</a> <br><br> <a href="https://docs.portworx.com/reference/portworx-instructional-videos">Portworx videos</a></td>
+</tr>
+<tr>
+<td>DB2 Warehouse</td>
+<td>Db2 Warehouse SMP HADR <br><br>IBM Data Replication for Db2 Continuous Availability <br><br> Built-in high availability feature for IBM Db2 Warehouse <br>MPP deployments w/highly available cluster file system <br>across AZ (ODF or Portworx)</td>
+<td><a href="https://www.ibm.com/docs/en/cloud-paks/cp-data/3.5.0?topic=warehouse-hadr-db2-smp">HADR on Db2 Warehouse SMP</a> <br><br> <a href="https://www.ibm.com/docs/en/drfa/1.0?topic=setting-up-replication">IBM DB2 Data Replication for Availability</a> <br><br> <a href="https://www.ibm.com/docs/en/db2-warehouse?topic=recovery-built-in-high-availability-feature-mpp-deployments">High availability feature for IBM Db2 Warehouse MPP deployments</a></td>
+</tr>
+<tr>
+<td>MongoDB</td>
+<td>Use ReplicaSet with one primary and 2 secondaries each in one AZ</td>
+<td><a href="https://www.youtube.com/watch?v=Q2lJH156SUQ&amp;list=PL34sAs7_26wPvZJqUJhjyNtm7UedWR8Ps&amp;index=8">How to Deploy a MongoDB ReplicaSet</a></td>
+</tr>
+<tr>
+<td>Kafka</td>
+<td>Strimzi based rack aware <br><br> Kafka CR rack: topologyKey: topology.kubernetes.io/zone</td>
+<td><a href="https://strimzi.io/docs/operators/latest/using.html#type-Rack-reference">Strimzi configuration</a> <br><br> <a href="https://strimzi.io/docs/operators/0.20.0/using.html#assembly-kafka-rack-deployment-configuration-kafka">Strimzi kafka operators</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="dr-practices-for-mas-prerequisites">DR Practices for MAS Prerequisites<a class="headerlink" href="#dr-practices-for-mas-prerequisites" title="Permanent link"></a></h3>
+<table>
+<thead>
+<tr>
+<th>Prerequisite</th>
+<th>Disaster Recovery</th>
+<th>References</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenShift</td>
+<td>Use OADP and its plugins</td>
+<td><a href="https://community.ibm.com/community/user/iot/blogs/sarika-budhiraja1/2021/12/31/backup-restore-mas-manage">Backup Restore</a></td>
+</tr>
+<tr>
+<td>File System</td>
+<td>Normal file system copy</td>
+<td></td>
+</tr>
+<tr>
+<td>DB2 Warehouse</td>
+<td>DB2 Warehouse HADR (CP4D) <br> DB2 Warehouse backup/restore</td>
+<td><a href="https://www.ibm.com/support/producthub/icpdata/docs/content/SSQNUZ_latest/svc-db2/aese-hadrovu.html">Db2 high availability disaster recovery</a> <br><br> <a href="https://www.ibm.com/docs/en/db2-warehouse?topic=warehouse-backup-restore-disaster-recovery">DB2 Warehouse disaster recovery</a></td>
+</tr>
+<tr>
+<td>MongoDB</td>
+<td>Back Up and Restore with MongoDB Tools</td>
+<td><a href="https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools">MongoDB backup and restore</a></td>
+</tr>
+<tr>
+<td>Kafka</td>
+<td>Mirror Maker 2 <br> Kafka Backup</td>
+<td><a href="https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-mirrormaker">Kafka Mirror Maker</a> <br><br> <a href="https://medium.com/@anatolyz/introducing-kafka-backup-9dc0677ea7ee">Kafka backup</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="mas-core">MAS Core<a class="headerlink" href="#mas-core" title="Permanent link"></a></h3>
+<table>
+<thead>
+<tr>
+<th>Data type</th>
+<th>Description</th>
+<th>HA Strategy</th>
+<th>DR Strategy</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application Code</td>
+<td>Product Images</td>
+<td>Multiple redundant copies (pods) of the critical microservices spread across AZs. Less critical ones get restarted by OCP</td>
+<td>Reinstall</td>
+<td>Reinstallation takes several minutes</td>
+</tr>
+<tr>
+<td>Custom Code</td>
+<td>None</td>
+<td>N/A</td>
+<td>N/A</td>
+<td></td>
+</tr>
+<tr>
+<td>Running State</td>
+<td>Kept by pre-reqs (e.g. SLS)</td>
+<td>N/A</td>
+<td>N/A</td>
+<td></td>
+</tr>
+<tr>
+<td>Configuration Data</td>
+<td>Kubernetes config (secrets, configmaps) held in etcd. Other config data is held in MongoDB.</td>
+<td>Etcd uses mirroring (set up by OCP install) <br><br> MongoDB uses mirroring (set up by default by customer)</td>
+<td>OpenShift data can be backed up and restored, alternatively it can be recreated by application reinstall. <br><br>MongoDb, has backup/restore procedures</td>
+<td></td>
+</tr>
+<tr>
+<td>Runtime Data</td>
+<td>None</td>
+<td>N/A</td>
+<td>N/A</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="mas-sls">MAS SLS<a class="headerlink" href="#mas-sls" title="Permanent link"></a></h3>
+<table>
+<thead>
+<tr>
+<th>Data type</th>
+<th>Description</th>
+<th>HA Strategy</th>
+<th>DR Strategy</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application Code</td>
+<td>Currently based still on Flexera, but will change in the future (read notes)</td>
+<td>Can’t have HA, it is a SPoF</td>
+<td>Redeploy</td>
+<td></td>
+</tr>
+<tr>
+<td>Custom Code</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+<td></td>
+</tr>
+<tr>
+<td>Running State</td>
+<td>Kept by Runtime Data</td>
+<td>Can’t have HA, it is a SPoF</td>
+<td>N/A</td>
+<td></td>
+</tr>
+<tr>
+<td>Configuration Data</td>
+<td>SLS holds the Customer’s license file and credentials to access MongoDB.</td>
+<td>None</td>
+<td>Reuse the license file and the MongoDB credentials</td>
+<td>The license file is held by a ConfigMap, and MongoDB credentials by a Secret, therefore when backup cluster config, this will be picked up as well. The same info can be supplied by MAS when it configures SLS. The license is available in License Key Server (LKC), so in effect, LKC is the DR backup technology</td>
+</tr>
+<tr>
+<td>Runtime Data</td>
+<td>Rational License Key Server (Flexera) store, eventually MongoDB</td>
+<td>Can’t have HA, it is a SPoF</td>
+<td>None (see comment)</td>
+<td>SLS has a runtime state in Mongo so a true DR approach might consider how Mongo is handled. However, in principle MAS should be able to reconcile and rebuild this state automatically</td>
+</tr>
+</tbody>
+</table>
+<h3 id="manage">Manage<a class="headerlink" href="#manage" title="Permanent link"></a></h3>
+<table>
+<thead>
+<tr>
+<th>Data type</th>
+<th>Description</th>
+<th>HA Strategy</th>
+<th>DR Strategy</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application Code</td>
+<td>Base product image "+" <br>additional functional code</td>
+<td>Can’t have full HA <br>Separate Classic UI with running state from the rest<br>Multi-AZ deployment</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Custom Code</td>
+<td>Code packaged and available on HTTP share<br><br> Scripts part of Runtime Data</td>
+<td>None <br>Same as Runtime Data</td>
+<td>Make sure the same HTTP share is available from the DR site <br>Same as Runtime Data</td>
+<td></td>
+</tr>
+<tr>
+<td>Running State</td>
+<td>Session state maintained by JSP serving Classic UI</td>
+<td>No solution for Classic UI <br><br>Long term approach to make all application code stateless</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>Configuration Data</td>
+<td>ConfigMaps, Secrets, CRDs, CRs</td>
+<td>OpenShift multi-AZ deployment</td>
+<td>Backup/Restore possibly using Velero and its addons</td>
+<td></td>
+</tr>
+<tr>
+<td>Runtime Data</td>
+<td>Backend SQL database (DB2, Oracle, MSSQL)</td>
+<td>Active-active replication provided by DB technology or infrastructure base disk mirroring</td>
+<td>Backup/Restore</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="db2-high-availability-disaster-recovery-hadr">DB2 High Availability Disaster Recovery (HADR)<a class="headerlink" href="#db2-high-availability-disaster-recovery-hadr" title="Permanent link"></a></h3>
+<p>You can configure Db2® high availability disaster recovery (HADR) in a single Red Hat® OpenShift® project or in different OpenShift projects.
+<a href="https://www.ibm.com/docs/en/cloud-paks/cp-data/4.0?topic=hadr-configuring-starting">https://www.ibm.com/docs/en/cloud-paks/cp-data/4.0?topic=hadr-configuring-starting</a></p>
+<p>If you are installing services that depend on Db2® and you are planning to use IBM® Cloud File Storage on NFS 4 for persistent storage, you must configure ID mapping, which enables no_root_squash. Configuring no_root_squash allows root clients to retain root permissions on the remote NFS share.
+<a href="https://www.ibm.com/docs/en/cloud-paks/cp-data/4.0?topic=storage-setting-up-cloud-file">https://www.ibm.com/docs/en/cloud-paks/cp-data/4.0?topic=storage-setting-up-cloud-file</a></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ibmmaximo/backupandrestore" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+      <script src="search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.3.0
+Build Date UTC : 2022-07-06 02:30:25.383490+00:00
+-->
