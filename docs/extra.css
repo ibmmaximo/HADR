@@ -33,3 +33,10 @@ img {
   margin-left: auto;
   margin-right: auto;
 }
+
+.wy-nav-content {
+  padding: 1.618em 3.236em;
+  height: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
