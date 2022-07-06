@@ -35,8 +35,5 @@ img {
 }
 
 .wy-nav-content {
-  padding: 1.618em 3.236em;
-  height: 100%;
-  max-width: 1200px;
-  margin: auto;
+    max-width: 1200px !important;
 }
