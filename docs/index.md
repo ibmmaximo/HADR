@@ -163,5 +163,12 @@ You can configure Db2® high availability disaster recovery (HADR) in a single R
 If you are installing services that depend on Db2® and you are planning to use IBM® Cloud File Storage on NFS 4 for persistent storage, you must configure ID mapping, which enables no_root_squash. Configuring no_root_squash allows root clients to retain root permissions on the remote NFS share.
 [https://www.ibm.com/docs/en/cloud-paks/cp-data/4.0?topic=storage-setting-up-cloud-file](https://www.ibm.com/docs/en/cloud-paks/cp-data/4.0?topic=storage-setting-up-cloud-file)
 
-
+## Best Practices
+- Schedule backup should be based on RTO and RPO. Service Level Objective is critical to creating a backup architecture that meets the need of an organization.
+- Perform regular backups.
+- Decide on the backup retention period.
+- MAS user registry (MONGO DB) backup should be taken before Manage(application) DB (user registry) backup. If there is any inconsistency between user registries, the Manage application cron task should be run to make it consistent.
+- Use the provider’s (Oracle, SQL Server, DB2, Mongo) database backup and restore process.
+- Manage namespace backup and restore process is outlined in the ‘Application Backup and Restore with OADP’ section.
+- Test the restore process.
 
