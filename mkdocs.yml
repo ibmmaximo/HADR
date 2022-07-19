@@ -1,6 +1,7 @@
 # mkdocs serve
 
-site_name: High Availabilty and Disaster Recovery
+site_name: High Availability and Disaster Recovery
+
 site_url: https://ibmmaximo.github.io/backupandrestore
 
 repo_name: GitHub
@@ -10,7 +11,7 @@ edit_uri: blob/master/docs/
 nav:
   #- 'Home': index.md
   #- 'Changes': changes.md
-  - 'HADR': docs/index.md
+  - 'High Availabilty and Disaster Recovery Strategies': index.md
   #  - 'OCP': playbooks/ocp.md
   #  - 'Install Core': playbooks/oneclick-core.md
   #  - 'Add IoT': playbooks/oneclick-iot.md

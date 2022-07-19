@@ -1,4 +1,4 @@
-# High Availabilty and Disaster Recovery Stratgies
+# High Availabilty and Disaster Recovery Strategies
 A resilient includes system should be continuous and highly available and have processes and policies that enable recovery from disaster. This article outlines the   options regarding HA/DR for applications deployed on OpenShift.
 
 **High Availability (HA)** means that an application is available regardless of underlying failures. It refers to the system having multiple points of failure by adding redundancy to the system to ensure continuous operations or uptime for an extended period. High Availability ensures your systems, databases, and applications operate when and as needed. An example scenario where high availability comes into play is when a node fails, and Kubernetes reschedules any lost pods to surviving nodes. 
@@ -94,7 +94,7 @@ In addition to potential points of failure discussed above, ensuring availabilit
 #### Storage availability
 The best ways to maintain the availability of storage are to use replicated storage solutions, shared storage that is unaffected by outages, or a database service that is independent of the cluster.
 
-### Application Backup with OADP (Open API Data Protection)
+## Application Backup with OADP (Open API Data Protection)
 Application granular and cluster consistent backups using OADP operator and snapshots with CSI interface ensure backup with open standards.
 
 ![Image](oadp.png)
@@ -105,7 +105,7 @@ This open-source operator sets up and installs Velero on the OpenShift platform,
 
 This blog explains how to install and use the OADP operator to take the application backup. The operator uses the plugin to take the PVs backup for the Manage app attached docs. You need to have storage classes installed to use PVs.  
 
-### HA Practices for MAS Prerequisites
+## HA Practices for MAS Prerequisites
 
 Prerequisite   |  High Availability  | References  | 
 ------ |  -------- | -------------------------- |
@@ -116,7 +116,7 @@ MongoDB | Use ReplicaSet with one primary and 2 secondaries each in one AZ | [Ho
 Kafka | Strimzi based rack aware <br><br> Kafka CR rack: topologyKey: topology.kubernetes.io/zone | [Strimzi configuration](https://strimzi.io/docs/operators/latest/using.html#type-Rack-reference) <br><br> [Strimzi kafka operators](https://strimzi.io/docs/operators/0.20.0/using.html#assembly-kafka-rack-deployment-configuration-kafka) |
 
 
-### DR Practices for MAS Prerequisites
+## DR Practices for MAS Prerequisites
 
 Prerequisite   |  Disaster Recovery  | References  | 
 ------ |  -------- | -------------------------- |
@@ -126,7 +126,7 @@ DB2 Warehouse | DB2 Warehouse HADR (CP4D) <br> DB2 Warehouse backup/restore | [D
 MongoDB | Back Up and Restore with MongoDB Tools | [MongoDB backup and restore](https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools) |
 Kafka | Mirror Maker 2 <br> Kafka Backup | [Kafka Mirror Maker](https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-mirrormaker) <br><br> [Kafka backup](https://medium.com/@anatolyz/introducing-kafka-backup-9dc0677ea7ee) |
 
-### MAS Core
+## MAS Core
 
 Data type   |  Description  | HA Strategy  | DR Strategy | Comments |
 ---- | --------- | ---------- | --------- | ------- |
@@ -136,7 +136,7 @@ Running State | Kept by pre-reqs (e.g. SLS) | N/A | N/A ||
 Configuration Data | Kubernetes config (secrets, configmaps) held in etcd. Other config data is held in MongoDB.| Etcd uses mirroring (set up by OCP install) <br><br> MongoDB uses mirroring (set up by default by customer) | OpenShift data can be backed up and restored, alternatively it can be recreated by application reinstall. <br><br>MongoDb, has backup/restore procedures ||
 Runtime Data | None | N/A | N/A ||
 
-### MAS SLS
+## MAS SLS
 
 Data type   |  Description  | HA Strategy  | DR Strategy | Comments |
 ------ | ----------- | ----------- | ---------- | ------ |
@@ -146,7 +146,7 @@ Running State | Kept by Runtime Data | Can’t have HA, it is a SPoF | N/A ||
 Configuration Data | SLS holds the Customer’s license file and credentials to access MongoDB. | None | Reuse the license file and the MongoDB credentials | The license file is held by a ConfigMap, and MongoDB credentials by a Secret, therefore when backup cluster config, this will be picked up as well. The same info can be supplied by MAS when it configures SLS. The license is available in License Key Server (LKC), so in effect, LKC is the DR backup technology |
 Runtime Data | Rational License Key Server (Flexera) store, eventually MongoDB | Can’t have HA, it is a SPoF | None (see comment) | SLS has a runtime state in Mongo so a true DR approach might consider how Mongo is handled. However, in principle MAS should be able to reconcile and rebuild this state automatically |
 
-### Manage
+## Manage
 
 Data type   |  Description  | HA Strategy  | DR Strategy | Comments |
 ------ | ---------- | ------------- | ------------| --------- |
@@ -156,7 +156,7 @@ Running State | Session state maintained by JSP serving Classic UI | No solution
 Configuration Data | ConfigMaps, Secrets, CRDs, CRs | OpenShift multi-AZ deployment | Backup/Restore possibly using Velero and its addons ||
 Runtime Data | Backend SQL database (DB2, Oracle, MSSQL)| Active-active replication provided by DB technology or infrastructure base disk mirroring | Backup/Restore ||
 
-### DB2 High Availability Disaster Recovery (HADR)
+## DB2 High Availability Disaster Recovery (HADR)
 You can configure Db2® high availability disaster recovery (HADR) in a single Red Hat® OpenShift® project or in different OpenShift projects.
 [https://www.ibm.com/docs/en/cloud-paks/cp-data/4.0?topic=hadr-configuring-starting](https://www.ibm.com/docs/en/cloud-paks/cp-data/4.0?topic=hadr-configuring-starting)
 
