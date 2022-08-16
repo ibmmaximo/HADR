@@ -103,7 +103,8 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>High Availabilty and Disaster Recovery Strategies</li>
+    <li><a href="." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>High Availabilty and Disaster Recovery Strategies</li>
     <li class="wy-breadcrumbs-aside">
         <a href="https://github.com/ibmmaximo/backupandrestore/blob/master/docs/index.md"
           class="icon icon-github"> Edit on GitHub</a>
@@ -111,7 +112,6 @@
   </ul>
   <hr/>
 </div>
-
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
@@ -121,12 +121,16 @@
 <p><strong>Disaster Recovery (DR)</strong> means action needs to be taken to recover applications in the event of a disaster. We need to make sure our systems can survive a disaster, which usually means building a second system in a location removed from the primary so that local events such as weather, earthquakes, or meteors won’t damage both systems.  An example scenario where disaster recovery is needed is when the entire cluster is lost, and the workload must be recovered to a new cluster. The primary goal is to minimize the overall impact of a disaster on business performance. </p>
 <p>By understanding potential points of failure, and risks, you can architect both your applications and your clusters to be as resilient as necessary at each specific level. Depending on the failure type two types of solutions can be used, Backup Solutions and Disaster Recovery Solutions.</p>
 <ul>
-<li>Backup Solutions</li>
+<li>
+<p>Backup Solutions</p>
+<ul>
 <li>Protection against logical failures </li>
 <li>Restore to the previous point-in-time copy of the data and/or the application state</li>
 <li>Disaster Recovery Solutions</li>
 <li>Protection against physical HW failures and Data Center disasters </li>
 <li>Failover to remote Cold (Standby) or Hot Site</li>
+</ul>
+</li>
 </ul>
 <p>Recovery Time Objective (RTO) and Recovery Point Objective (RPO) are vital parameters in any disaster recovery or data protection plan. </p>
 <p>Recovery Point Objective (RPO) is a time-based measurement of the maximum amount of data loss that is acceptable to an organization. It is the time between each backup of data. If the last available backup is from 10 hours ago, and the RPO is 12 hours, then it is within the business continuity plan’s RPO parameters. It answers, “Up to what point in time does the business process’s recovery continue acceptably given the volume of data lost during that interval?”</p>
@@ -135,16 +139,16 @@
 <h2 id="resiliency-solutions-for-different-service-level-objectives">Resiliency Solutions for different Service level objectives<a class="headerlink" href="#resiliency-solutions-for-different-service-level-objectives" title="Permanent link"></a></h2>
 <p>Protection against a wide spectrum of failures is available:
 - Backup Restore: Built on snapshot-based technology. Most customers start with the backup/restore solution. The multiple copies of the backup are kept and can be reverted to the right copy of the backup. This can be used in the following scenarios:
-  - Backup before upgrading to a new version or applying any updates. It can be restored to an earlier point in case something goes wrong.
-  - Cluster goes down (DR). A new cluster can be instantiated and restored (See Active/Passive Scenario section). 
-  - Create a development/QA environment
+    - Backup before upgrading to a new version or applying any updates. It can be restored to an earlier point in case something goes wrong.
+    - Cluster goes down (DR). A new cluster can be instantiated and restored (See Active/Passive Scenario section). 
+    - Create a development/QA environment
 - Data centers in different geographical areas. If a site goes down, the requests can be processed by an active cluster on the second site.
-  - No latency dependency
-  - Asynchronous data replication. The replication interval is between 5 – 15 mins.
-  - You can optionally have an external storage RHCS (separate from OCP clusters that run workloads) with an Arbiter node (control plane) in the neutral zone and have synchronous mirroring across Persistent Volumes in both sites (latency &lt; 10ms) for reliability.
+    - No latency dependency
+    - Asynchronous data replication. The replication interval is between 5 – 15 mins.
+    - You can optionally have an external storage RHCS (separate from OCP clusters that run workloads) with an Arbiter node (control plane) in the neutral zone and have synchronous mirroring across Persistent Volumes in both sites (latency &lt; 10ms) for reliability.
 - Data centers in proximity to sites
-  - Latency should be &lt; 10ms
-  - Synchronous replication between sites</p>
+    - Latency should be &lt; 10ms
+    - Synchronous replication between sites</p>
 <p><img alt="Image" src="rtorpo.png" /></p>
 <h2 id="scenarios">Scenarios<a class="headerlink" href="#scenarios" title="Permanent link"></a></h2>
 <h3 id="scenario-customer-can-deploy-workloads-in-three-availability-zones">Scenario-Customer can deploy workloads in three availability zones<a class="headerlink" href="#scenario-customer-can-deploy-workloads-in-three-availability-zones" title="Permanent link"></a></h3>
@@ -153,8 +157,10 @@
 <li>Application deployed on a cluster that is stretched across multiple zones in a region</li>
 <li>ODF (storage layer) provides synchronous consistent copies across all Availability Zones (AZs) ensuring no data loss during zone failure</li>
 <li>ODF has 3 replicas by default and can be stretched across availability zones</li>
-<li>Suitable for public cloud platforms with regions supporting 3 or more AZs</li>
+<li>Suitable for public cloud platforms with regions supporting 3 or more AZs<ul>
 <li>Can be deployed on-prem when AZs are connected by networks with &lt;10ms latency</li>
+</ul>
+</li>
 </ul>
 <p><img alt="Image" src="hazones.png" /></p>
 <h3 id="scenario-customer-has-two-data-centers">Scenario-Customer has two data centers<a class="headerlink" href="#scenario-customer-has-two-data-centers" title="Permanent link"></a></h3>
@@ -480,6 +486,6 @@ The storage would need to be replicated in line with their Recovery Time Objecti
 </html>
 
 <!--
-MkDocs version : 1.3.0
-Build Date UTC : 2022-07-19 05:47:10.254171+00:00
+MkDocs version : 1.3.1
+Build Date UTC : 2022-08-16 03:46:33.957266+00:00
 -->
