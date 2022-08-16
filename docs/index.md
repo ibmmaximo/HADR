@@ -8,11 +8,12 @@ A resilient includes system should be continuous and highly available and have p
 By understanding potential points of failure, and risks, you can architect both your applications and your clusters to be as resilient as necessary at each specific level. Depending on the failure type two types of solutions can be used, Backup Solutions and Disaster Recovery Solutions.
 
 - Backup Solutions
-  - Protection against logical failures 
-  - Restore to the previous point-in-time copy of the data and/or the application state
+
+    - Protection against logical failures 
+    - Restore to the previous point-in-time copy of the data and/or the application state
 - Disaster Recovery Solutions
-  - Protection against physical HW failures and Data Center disasters 
-  - Failover to remote Cold (Standby) or Hot Site
+    - Protection against physical HW failures and Data Center disasters 
+    - Failover to remote Cold (Standby) or Hot Site
 
 Recovery Time Objective (RTO) and Recovery Point Objective (RPO) are vital parameters in any disaster recovery or data protection plan. 
 
@@ -25,16 +26,16 @@ The RPO/RTO, along with a business impact analysis, provides the basis for ident
 ## Resiliency Solutions for different Service level objectives
 Protection against a wide spectrum of failures is available:
 - Backup Restore: Built on snapshot-based technology. Most customers start with the backup/restore solution. The multiple copies of the backup are kept and can be reverted to the right copy of the backup. This can be used in the following scenarios:
-  - Backup before upgrading to a new version or applying any updates. It can be restored to an earlier point in case something goes wrong.
-  - Cluster goes down (DR). A new cluster can be instantiated and restored (See Active/Passive Scenario section). 
-  - Create a development/QA environment
+    - Backup before upgrading to a new version or applying any updates. It can be restored to an earlier point in case something goes wrong.
+    - Cluster goes down (DR). A new cluster can be instantiated and restored (See Active/Passive Scenario section). 
+    - Create a development/QA environment
 - Data centers in different geographical areas. If a site goes down, the requests can be processed by an active cluster on the second site.
-  - No latency dependency
-  - Asynchronous data replication. The replication interval is between 5 – 15 mins.
-  - You can optionally have an external storage RHCS (separate from OCP clusters that run workloads) with an Arbiter node (control plane) in the neutral zone and have synchronous mirroring across Persistent Volumes in both sites (latency < 10ms) for reliability.
+    - No latency dependency
+    - Asynchronous data replication. The replication interval is between 5 – 15 mins.
+    - You can optionally have an external storage RHCS (separate from OCP clusters that run workloads) with an Arbiter node (control plane) in the neutral zone and have synchronous mirroring across Persistent Volumes in both sites (latency < 10ms) for reliability.
 - Data centers in proximity to sites
-  - Latency should be < 10ms
-  - Synchronous replication between sites
+    - Latency should be < 10ms
+    - Synchronous replication between sites
 
 ![Image](rtorpo.png)
 
@@ -46,7 +47,7 @@ Deploying an OpenShift cluster across at least three availability zones is a rec
 - ODF (storage layer) provides synchronous consistent copies across all Availability Zones (AZs) ensuring no data loss during zone failure
 - ODF has 3 replicas by default and can be stretched across availability zones
 - Suitable for public cloud platforms with regions supporting 3 or more AZs
-  - Can be deployed on-prem when AZs are connected by networks with <10ms latency
+    - Can be deployed on-prem when AZs are connected by networks with <10ms latency
   
  ![Image](hazones.png)
 
