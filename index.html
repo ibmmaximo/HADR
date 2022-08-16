@@ -126,7 +126,11 @@
 <ul>
 <li>Protection against logical failures </li>
 <li>Restore to the previous point-in-time copy of the data and/or the application state</li>
-<li>Disaster Recovery Solutions</li>
+</ul>
+</li>
+<li>
+<p>Disaster Recovery Solutions</p>
+<ul>
 <li>Protection against physical HW failures and Data Center disasters </li>
 <li>Failover to remote Cold (Standby) or Hot Site</li>
 </ul>
@@ -137,18 +141,32 @@
 <p>Recovery Time Objective (RTO) is the duration of time in which a business process must be restored after the disaster to avoid a break in business continuity. It answers, “How much time does it take to recover from business process disruption?”</p>
 <p>The RPO/RTO, along with a business impact analysis, provides the basis for identifying strategies for the business continuity plan. There is always some gap between the actuals and objectives because of various manual and automated steps to bring the business application up. These actuals can only be exposed by disaster and business disruption tests.</p>
 <h2 id="resiliency-solutions-for-different-service-level-objectives">Resiliency Solutions for different Service level objectives<a class="headerlink" href="#resiliency-solutions-for-different-service-level-objectives" title="Permanent link"></a></h2>
-<p>Protection against a wide spectrum of failures is available:
-- Backup Restore: Built on snapshot-based technology. Most customers start with the backup/restore solution. The multiple copies of the backup are kept and can be reverted to the right copy of the backup. This can be used in the following scenarios:
-    - Backup before upgrading to a new version or applying any updates. It can be restored to an earlier point in case something goes wrong.
-    - Cluster goes down (DR). A new cluster can be instantiated and restored (See Active/Passive Scenario section). 
-    - Create a development/QA environment
-- Data centers in different geographical areas. If a site goes down, the requests can be processed by an active cluster on the second site.
-    - No latency dependency
-    - Asynchronous data replication. The replication interval is between 5 – 15 mins.
-    - You can optionally have an external storage RHCS (separate from OCP clusters that run workloads) with an Arbiter node (control plane) in the neutral zone and have synchronous mirroring across Persistent Volumes in both sites (latency &lt; 10ms) for reliability.
-- Data centers in proximity to sites
-    - Latency should be &lt; 10ms
-    - Synchronous replication between sites</p>
+<p>Protection against a wide spectrum of failures is available:</p>
+<ul>
+<li>
+<p>Backup Restore: Built on snapshot-based technology. Most customers start with the backup/restore solution. The multiple copies of the backup are kept and can be reverted to the right copy of the backup. This can be used in the following scenarios:</p>
+<ul>
+<li>Backup before upgrading to a new version or applying any updates. It can be restored to an earlier point in case something goes wrong.</li>
+<li>Cluster goes down (DR). A new cluster can be instantiated and restored (See Active/Passive Scenario section). </li>
+<li>Create a development/QA environment</li>
+</ul>
+</li>
+<li>
+<p>Data centers in different geographical areas. If a site goes down, the requests can be processed by an active cluster on the second site.</p>
+<ul>
+<li>No latency dependency</li>
+<li>Asynchronous data replication. The replication interval is between 5 – 15 mins.</li>
+<li>You can optionally have an external storage RHCS (separate from OCP clusters that run workloads) with an Arbiter node (control plane) in the neutral zone and have synchronous mirroring across Persistent Volumes in both sites (latency &lt; 10ms) for reliability.</li>
+</ul>
+</li>
+<li>
+<p>Data centers in proximity to sites</p>
+<ul>
+<li>Latency should be &lt; 10ms</li>
+<li>Synchronous replication between sites</li>
+</ul>
+</li>
+</ul>
 <p><img alt="Image" src="rtorpo.png" /></p>
 <h2 id="scenarios">Scenarios<a class="headerlink" href="#scenarios" title="Permanent link"></a></h2>
 <h3 id="scenario-customer-can-deploy-workloads-in-three-availability-zones">Scenario-Customer can deploy workloads in three availability zones<a class="headerlink" href="#scenario-customer-can-deploy-workloads-in-three-availability-zones" title="Permanent link"></a></h3>
@@ -487,5 +505,5 @@ The storage would need to be replicated in line with their Recovery Time Objecti
 
 <!--
 MkDocs version : 1.3.1
-Build Date UTC : 2022-08-16 03:46:33.957266+00:00
+Build Date UTC : 2022-08-16 03:52:51.307741+00:00
 -->
